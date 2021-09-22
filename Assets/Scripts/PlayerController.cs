@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public Transform respawnPoint;
 
+    Vector3 movement;
     private int count;
     private Rigidbody rb;
     private float movementX, movementY;
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
     }
@@ -55,5 +57,14 @@ public class PlayerController : MonoBehaviour
                 winTextObject.SetActive(true);
             }
         }
+
+        if (other.gameObject.CompareTag("Death"))
+        {
+            Debug.Log("You Died!!!");
+            transform.position = respawnPoint.transform.position;
+
+        }    
     }
+
+
 }
