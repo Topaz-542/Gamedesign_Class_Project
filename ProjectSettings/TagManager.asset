@@ -9,6 +9,10 @@ TagManager:
   - Crate
   - Death
   - Door
+  - Spring
+  - Red Gem
+  - Blue Gem
+  - Green Gem
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Post Processing
   - 
   - 
   - 

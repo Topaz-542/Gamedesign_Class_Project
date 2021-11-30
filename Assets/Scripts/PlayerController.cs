@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+
 
 public class PlayerController : MonoBehaviour
 {
 
     public float speed = 0;
-    public TextMeshProUGUI countText;
-    public GameObject winTextObject;
+    public float maxSpeed = 0;
+    public float maxFallSpeed = 0;
+    public float drag = 0;
+
+
+    //public GameObject winTextObject;
     public Transform respawnPoint;
 
     Vector3 movement;
-    private int count;
+
+    private int deaths = 0;
     private Rigidbody rb;
     private float movementX, movementY;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        count = 0;
 
-        SetCountText();
-        winTextObject.SetActive(false);
+        //winTextObject.SetActive(false);
     }
     void OnMove(InputValue movementValue)
     {
@@ -32,38 +35,42 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    void SetCountText()
-    {
-        countText.text = "Score: " + count.ToString();
-    }
 
     void FixedUpdate()
     {
+        
         movement = new Vector3(movementX, 0.0f, movementY);
 
-        rb.AddForce(movement * speed);
+        rb.AddForce(Vector3.ClampMagnitude(movement, maxSpeed) * speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            other.gameObject.SetActive(false);
-            count++;
 
-            SetCountText();
-            if(count >= 12)
-            {
-                winTextObject.SetActive(true);
-            }
-        }
 
         if (other.gameObject.CompareTag("Death"))
         {
             Debug.Log("You Died!!!");
             transform.position = respawnPoint.transform.position;
 
+            freezePlayer(rb);
+            deaths++;
         }    
+
+        if (other.gameObject.CompareTag("Respawn"))
+        {
+            unfreezePlayer(rb);
+        }
+    }
+
+    void freezePlayer(Rigidbody rb)
+    {
+        rb.drag = 99999999999;
+    }
+
+    void unfreezePlayer(Rigidbody rb)
+    {
+        rb.drag = drag;
     }
 
 
