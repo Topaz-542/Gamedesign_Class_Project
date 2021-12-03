@@ -14,9 +14,15 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField]
     public GameObject blueGem;
     [SerializeField]
+    GameObject blueArrow;
+    [SerializeField]
     public GameObject redGem;
     [SerializeField]
+    GameObject redArrow;
+    [SerializeField]
     public GameObject greenGem;
+    [SerializeField]
+    GameObject greenArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -52,18 +58,21 @@ public class PlayerUIManager : MonoBehaviour
         {
             //other.gameObject.SetActive(false);
             blueGem.SetActive(true);
+            blueArrow.SetActive(false);
         }
 
         if (other.gameObject.CompareTag("Red Gem"))
         {
             //other.gameObject.SetActive(false);
             redGem.SetActive(true);
+            redArrow.SetActive(false);
         }
         
         if (other.gameObject.CompareTag("Green Gem"))
         {
             //other.gameObject.SetActive(false);
             greenGem.SetActive(true);
+            greenArrow.SetActive(false);
         }
     }
 }
