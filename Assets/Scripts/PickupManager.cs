@@ -11,6 +11,8 @@ public class PickupManager : MonoBehaviour
     Collider collide;
     [SerializeField]
     GameObject model;
+    [SerializeField]
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class PickupManager : MonoBehaviour
             collide.enabled = !collide.enabled;
             model.SetActive(false);
             burst.Play();
+            audio.Play();
             
         }
     }

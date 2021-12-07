@@ -13,6 +13,7 @@ TagManager:
   - Red Gem
   - Blue Gem
   - Green Gem
+  - Water
   layers:
   - Default
   - TransparentFX

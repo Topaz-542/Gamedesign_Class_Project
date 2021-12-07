@@ -6,6 +6,8 @@ public class Trigger_Door : MonoBehaviour
 {
 
     public GameObject door;
+    [SerializeField]
+    AudioSource source;
     
 
     // Start is called before the first frame update
@@ -25,6 +27,7 @@ public class Trigger_Door : MonoBehaviour
         if (other.gameObject.CompareTag("Crate"))
         {
             door.SetActive(false);
+            source.Play();
         }
     }
 
@@ -33,6 +36,7 @@ public class Trigger_Door : MonoBehaviour
         if (other.gameObject.CompareTag("Crate"))
         {
             door.SetActive(true);
+            source.Play();
         }
     }
 }

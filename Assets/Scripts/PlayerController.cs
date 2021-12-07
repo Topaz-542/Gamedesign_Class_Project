@@ -12,6 +12,14 @@ public class PlayerController : MonoBehaviour
     public float maxFallSpeed = 0;
     public float drag = 0;
 
+    [SerializeField]
+    AudioSource source;
+
+    [SerializeField]
+    AudioSource splashSource;
+
+    [SerializeField]
+    ParticleSystem splash;
 
     //public GameObject winTextObject;
     public Transform respawnPoint;
@@ -60,6 +68,17 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Respawn"))
         {
             unfreezePlayer(rb);
+        }
+
+        if(other.gameObject.CompareTag("Teleport"))
+        {
+            source.Play();
+        }
+
+        if(other.gameObject.CompareTag("Water"))
+        {
+            splashSource.Play();
+            splash.Play();
         }
     }
 
